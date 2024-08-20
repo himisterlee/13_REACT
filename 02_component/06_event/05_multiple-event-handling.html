@@ -28,7 +28,7 @@
         console.log(obj2);
 
         // 2. rest parameter
-        let [a, b, c] = [1, 2, 3];
+        let [a, ...rest] = [1, 2, 3];
 
         console.log(a); // 1
         console.log(rest); // [2,3]
@@ -60,7 +60,7 @@
             // 이벤트가 발생한 input 태그의 name 속성 값을 활용하여
             // 하나의 이벤트 핸들러 메소드로 처리할 수 있다.
             onChangeHandler = e => {
-                console.log(e.target.name);
+                // console.log(e.target.name);
                 this.setState({
                     [e.target.name]: e.target.value
                 });
@@ -86,7 +86,7 @@
                             name='username'
                             placeholder='아이디를 입력하세요'
                             value={this.state.username}
-                            onChange={this.onChangeHandler1}
+                            onChange={this.onChangeHandler}
                             />
                             <br/>
                             <label>비밀번호</label>
@@ -95,7 +95,7 @@
                                 name='password'
                                 placeholder='비밀번호를 입력하세요'
                                 value={this.state.password}
-                                onChange={this.onChangeHandler2}
+                                onChange={this.onChangeHandler}
                                 />
                                 <button onClick={this.onClickHandler}>로그인</button>
                                 </>
