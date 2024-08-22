@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id = "root"></div>
+
+
+    <script type = "text/babel">
+        const {useReducer} = React;
+
+        function reducer(state, action) {
+            return {
+
+
+            }
+
+
+
+            function nameList() {
+                const [state, dispatch] = useReducer(reducer, {
+                    id: 1, name:'홍길동',
+                    id: 2, name:'유관순',
+                    id: 3, name:'이순신'
+                });
+
+                const {id, name} = state;
+
+
+                return (
+                    <>
+                    <ul>
+                        <input type='text' name='inputText' onChange={onChangeHandler}/>
+                        <button onClick={onClickHandler}>추가</button>
+                        {nameList}
+                    </ul>
+                    </>
+                )
+
+
+
+
+
+            }
+
+
+            // 사용자에게 입력받는 값
+            const [inputText, setInputText] = useState('');
+
+            // 새로운 id 값 생성
+            const [nextId, setNextId] = useState(4);
+
+            // 사용자에게 입력받은 값으로 텍스트 박스에 표시해준다.
+            const onChangeHandler = (e) => {
+                setInputText(e.target.value);
+            }
+
+            // const onChangeHandler = e => setInputText(e.target.value);
+
+            // 추가 버튼을 클릭했을 때 진행되는 내용
+            // 입력받은 값을 추가하여 배열목록을 반환해줌
+            const onClickHandler = () => {
+                // 배열 메서드
+                // arr.concat('인자') : 인자로 넘겨준 값을 추가한 새로운 배열을 반환해준다.
+                const namesCopy = names.concat({
+                    id: nextId,
+                    name: inputText,
+                });
+
+                console.log(namesCopy);
+
+                setNextId(nextId + 1);
+                setNames(namesCopy)
+                setInputText('');
+                
+            }
+
+            // 추가된 목록을 더블클릭시 더블클릭한 값의 id 를 비교해서 일치하지 않는 객체만 다시 배열로 만들어 반환해줌
+            const onRemove = id => {
+                /*
+                    arr.filter(callback)
+                    기존 배열에서 callback 함수를 각 요소마다 실행하고 true를 반환하는 요소들만으로
+                    다시 배열을 정의하여 반환해준다.
+                */
+
+                // id로 넘어온(더블클릭 당한 이름의 id)와 일치하지 않는 객체만 다시 배열로 반환
+                const changeNames = names.filter(name => name.id !== id);
+                setNames(changeNames);
+            }
+
+            // 표시되는 리스트들을 맵으로 만들어 저장
+            // 목록 더블클릭시 발생하는 이벤트 추가
+            const nameList = names.map(name => <li key={name.id} onDoubleClick={() => onRemove(name.id)}>{name.name}</li>);
+
+        
+        }
+        ReactDOM.createRoot(document.getElementById('root')).render(<nameList/>);
+    </script>
+</body>
+</html>
