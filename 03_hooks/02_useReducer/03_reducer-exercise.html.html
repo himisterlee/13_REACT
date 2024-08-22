@@ -17,7 +17,7 @@
 
         function reducer(state, action) {
             return {
-
+                
 
             }
 
@@ -32,6 +32,8 @@
 
                 const {id, name} = state;
 
+                const onChangeHandler = e => dispatch(e.target.value)
+
 
                 return (
                     <>
@@ -43,9 +45,7 @@
                     </>
                 )
 
-
-
-
+                
 
             }
 
