@@ -1,6 +1,6 @@
 function Header() {
     return (
-        <h1>마멋's Coffee 입니다.</h1>
+        <h1>마멋's 레스토랑 입니다.</h1>
     )
 }
 
